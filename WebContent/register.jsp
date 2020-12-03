@@ -143,6 +143,14 @@
     				<input name="confirmPassword" required type="password" class="form-control control" id="inputPassword4" placeholder="Confirm Password">
   				</div>
   			</div>
+  		<div class="form-row pt-4">
+  			<div class="form-group ">
+  					<span class="fa fa-phone fa-2x" ></span>
+  				</div>
+  			<div class="form-group col-md-4">
+  				<input class="form-control control" type="tel" id="phone" name="number" placeholder="Phone Number"  required>
+  			</div>
+  		</div>
   		<div class="form-group pt-4">
     		<div class="form-check">
       			<input name="check" class="form-check-input" type="checkbox" id="gridCheck">
@@ -216,10 +224,7 @@
 					$("#submit-btn").show();
 					$("#loader").hide();
 					if(data.trim() === 'done'){
-						swal("Successfully Registered!", "Welcome to Thrive More", "success")
-						.then((value)=>{
-							window.location="profile.jsp";
-						});
+						swal("Successfully Registered!", "Welcome to Thrive More", "success");
 					}else{
 						swal(data);
 					}

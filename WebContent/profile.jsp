@@ -43,7 +43,12 @@
       <button class="btn  my-2 my-sm-0 text-white" type="submit" style="background:rgb(73, 137, 171); border-radius:0px 50px 50px 0px;"><span class="fa fa-search"></span></button>
     </form>
     <ul class="navbar-nav mx-auto">
-    	<li class="nav-link text-white" href="#"><img src="img/<%= user.getProfile() %>" width="25px" height="25px" style="border-radius:50%;"> <%= user.getFname() %> <%= user.getLname() %></li>
+    	<li class="nav-item active">
+    	<a class="nav-link text-white" href="dashboard.jsp"><img src="img/<%= user.getProfile() %>" width="25px" height="25px" style="border-radius:50%;"> <%= user.getFname() %> <%= user.getLname() %></a>
+    	</li>
+    	<li class="nav-item active ml-5" >
+    	<a class="nav-link text-white" data-toggle="modal" data-target="#ThrevensModal"> <strong class="text-muted p-1 border" style="border-radius:40px; background:white;"><%= user.getThrevens() %></strong> Threvens</a>
+    	</li>
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active ">
@@ -56,27 +61,28 @@
       <li class="nav-item">
         <a class="nav-link text-white" href="#"  data-toggle="modal" data-target="#notificationModal"><span class="fa fa-comment"> <sup class="text-center" style="width:15px; height:15px; background:red; color:white;">4</sup></a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item mr-5">
       	<div class="dropdown">
   <button class="btn btn-secondary bg-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <span class="fa fa-ellipsis-v"></span>
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-  	<a class="dropdown-item"  href=""><%= user.getFname() %> <%= user.getLname() %></a>
-  	<small><%= user.getEmail() %></small>
-  	<div class="dropdown-divider"></div>
+  	<a class="dropdown-item"  href="dashboard.jsp"><img src="img/<%= user.getProfile() %>" width="25px" height="25px" style="border-radius:50%;">  <%= user.getFname() %> <%= user.getLname() %></a>
+  	<small class="text-muted p-3"><%= user.getEmail() %></small>
+  	<div class="dropdown-divider m-3"></div>
     <a class="dropdown-item" href="#">Prominent Posts</a>
     <a class="dropdown-item" href="#">Despise Posts</a>
     <a class="dropdown-item" href="#">New Posts</a>
     <a class="dropdown-item" href="#">Upload Post</a>
-    <div class="dropdown-divider"></div>
+    <div class="dropdown-divider m-3"></div>
     <a class="dropdown-item" href="#">Apex</a>
     <a class="dropdown-item" href="#">About</a>
     <a class="dropdown-item" href="#">Discuss</a>
     <a class="dropdown-item" href="#">Settings</a>
     <a class="dropdown-item" href="#">Privacy Policy</a>
     <a class="dropdown-item" href="#">Contact Us</a>
-    <a class="dropdown-item" href="#">LogOut</a>
+    <div class="dropdown-divider m-3"></div>
+    <a class="dropdown-item" href="LogoutServlet">LogOut</a>
   </div>
 </div>
       </li>
@@ -135,16 +141,37 @@
   </div>
 </div>
 
-
+<!-- Threvens Modal -->
+<div class="modal fade" id="ThrevensModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="container-fluid">
 	<div class="row pt-4">
-		<div class="col-3">
+		<div class="col-3" >
 			<ul class="list-group">
   				<li class="list-group-item active p-2">Prominent Posts</li>
   				<li class="list-group-item p-2">Despise Posts</li>
   				<li class="list-group-item p-2">New Posts</li>
   				<li class="list-group-item p-2">Find Friends</li>
+  				<li class="list-group-item p-2">Notifications</li>
+  				<li class="list-group-item p-2">Messages</li>
   				<li class="list-group-item p-2">Apex</li>
   				<li class="list-group-item p-2">About</li>
   				<li class="list-group-item p-2">Discuss</li>
@@ -153,35 +180,98 @@
   				<li class="list-group-item p-2">Contact Us</li>
 			</ul>
 		</div>
-		<div class="col-5">
-			<div class="card" style="border-radius:60px; box-shadow:4px 5px 5px  rgb(97, 102, 102);" >
+		
+		<div class="col-6">
+			<div class="card" style=" box-shadow:4px 5px 5px  rgb(97, 102, 102);" >
   				
   				<div class="card-body">
   				<div class="container">
   				<div class="row">
- 				<div class="col-md-1 mr-2">
-    				<img src="img/<%= user.getProfile() %>" width="80px" height="60px"> 
+ 				<div class="col-2 ">
+    				<img src="img/<%= user.getProfile() %>" width="60px" height="50px"> 
   				</div>
-  				<div class="col-md-8 p-2 ml-3" >
-  					<form>
-    				<input type="text" class="form-control" placeholder="What's on your mind, <%= user.getFname() %>?" style="border-radius:150px; background:rgb(230, 231, 232);">
-  					</form>
+  				<div class="col-8 p-2  border" data-toggle="modal" data-target="#postModal" style="height:45px;border-radius:20px; background:rgb(245, 246, 247);" >
+    				<p class=" text-muted"  >What's on your mind, <%= user.getFname() %>?</p>
   				</div>
   				</div>
   				</div>
   				</div>
   				
-  				<div class="card-footer " style="border-radius:0px 0px 150px 150px;" >
-    				Upload Post
+  				<div class="card-footer m-2"  >
+    				<div class="container">
+    					<div class="row">
+    						<div class="col-md-2 p-1  border text-center " id="images" data-toggle="modal" data-target="#postModal">
+    							
+    							<a ><span class="fa fa-file-image-o "></span> Images</a>
+    							
+    						</div>
+    						<div class="col-md-2"></div>
+    						<div class="col-md-2  p-1 border text-center " id="videos" data-toggle="modal" data-target="#postModal">
+    							
+    							<a ><span class="fa fa-file-video-o "></span> Videos</a>
+    							
+    						</div>
+    						<div class="col-md-2"></div>
+    						<div class="col-md-2 p-1 border text-center " id="feelings" data-toggle="modal" data-target="#postModal">
+    							
+    								<a><span class="fa fa-smile-o"></span> Feelings</a>
+    							
+    						</div>
+    					</div>
+    				</div>
   				</div>
 			</div>
+			
 		</div>
-	</div>
-	<div class="container">
-		s
+		
 	</div>
 </div>
 
+<!-- Post Modal -->
+<div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    	<div class="container">
+      <div class="modal-header "> 
+      <div class="container">
+      	<div class="row ">
+      		<div class="col-10 p-2 text-center">
+        <h5>Create Post</h5>
+        	</div>
+        	<div class="col-2 mx-auto"> 
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="contaier">
+        	<div class="row">
+        		<div class="col-1">
+        			<img src="img/<%= user.getProfile() %>" width="30px" height="30px"/>  
+        		</div>
+        		<div class="col-6 ">
+        			<h6><%= user.getFname() %> <%= user.getLname() %></h6>
+        		</div>
+        	</div>
+        	<div class="row pt-2">
+        		<div class="col-12 p-2 ">
+        			
+        			<input type="text" class="form-control" placeholder="What's on your mind, <%= user.getFname() %>?" style="border:none;"/>
+        		</div>
+        	</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
 
  <!-- JavaScript -->
 	 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

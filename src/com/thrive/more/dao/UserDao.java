@@ -13,7 +13,7 @@ public class UserDao {
 		boolean flag = false;
 		try {
 			
-			String query = "insert into user(fname, lname, email, password, gender, profile) values(?,?,?,?,?,?)";
+			String query = "insert into user(fname, lname, email, password, gender, profile, number, threvens) values(?,?,?,?,?,?,?,?)";
 			PreparedStatement pstmt = this.con.prepareStatement(query);
 			pstmt.setString(1, user.getFname());
 			pstmt.setString(2, user.getLname());
@@ -21,6 +21,8 @@ public class UserDao {
 			pstmt.setString(4, user.getPassword());
 			pstmt.setString(5, user.getGender());
 			pstmt.setString(6, user.getProfile());
+			pstmt.setString(7, user.getNumber());
+			pstmt.setInt(8, user.getThrevens());
 			pstmt.executeUpdate();
 			
 			flag = true;
@@ -50,6 +52,14 @@ public class UserDao {
 				user.setPassword(set.getString("password"));
 				user.setGender(set.getString("gender"));
 				user.setProfile(set.getString("profile"));
+				user.setNumber(set.getString("number"));
+				user.setDob(set.getDate("dob"));
+				user.setTenthEdu(set.getString("tenthEdu"));
+				user.setTwelfthEdu(set.getString("twelfthEdu"));
+				user.setCountry(set.getString("country"));
+				user.setProffession(set.getString("profession"));
+				user.setClgEdu(set.getString("clgEdu"));
+				user.setAbout(set.getString("about"));
 			}
 			
 		}catch(Exception e) {
@@ -58,4 +68,5 @@ public class UserDao {
 		
 		return user;
 	}
+	
 }
