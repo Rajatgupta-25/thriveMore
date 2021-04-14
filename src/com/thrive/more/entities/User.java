@@ -10,19 +10,19 @@ public class User {
 	private String gender;
 	private String profile;
 	private String number;
-	private Date dob;
 	private String tenthEdu;
 	private String twelfthEdu;
 	private String clgEdu;
 	private String country;
 	private String proffession;
 	private String about;
-	private int threvens;
+	private String threvens;
+	private int id;
 	public User() {
 		
 	}
 	
-	public  User(String fname, String lname, String email, String password, String gender, String profile, String number, int threvens) {
+	public  User(String fname, String lname, String email, String password, String gender, String profile, String number, String threvens) {
 		this.fname = fname;
 		this.lname = lname;
 		this.email = email;
@@ -33,11 +33,19 @@ public class User {
 		this.threvens = threvens;
 	}
 	
-	public void setThrevens(int threvens) {
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public void setThrevens(String threvens) {
 		this.threvens = threvens;
 	}
 	
-	public int getThrevens() {
+	public String getThrevens() {
 		return threvens;
 	}
 	
@@ -49,9 +57,7 @@ public class User {
 		this.about = about;
 	}
 	
-	public Date getDob() {
-		return dob;
-	}
+	
 	
 	public String getTenthEdu() {
 		return tenthEdu;
@@ -73,9 +79,6 @@ public class User {
 		return proffession;
 	}
 	
-	public void setDob(Date dob) {
-		this.dob = dob;
-	}
 	
 	public void setTenthEdu(String tenthEdu) {
 		this.tenthEdu = tenthEdu;

@@ -22,7 +22,7 @@ public class UserDao {
 			pstmt.setString(5, user.getGender());
 			pstmt.setString(6, user.getProfile());
 			pstmt.setString(7, user.getNumber());
-			pstmt.setInt(8, user.getThrevens());
+			pstmt.setString(8, user.getThrevens());
 			pstmt.executeUpdate();
 			
 			flag = true;
@@ -53,7 +53,7 @@ public class UserDao {
 				user.setGender(set.getString("gender"));
 				user.setProfile(set.getString("profile"));
 				user.setNumber(set.getString("number"));
-				user.setDob(set.getDate("dob"));
+				
 				user.setTenthEdu(set.getString("tenthEdu"));
 				user.setTwelfthEdu(set.getString("twelfthEdu"));
 				user.setCountry(set.getString("country"));
@@ -69,4 +69,48 @@ public class UserDao {
 		return user;
 	}
 	
+	public boolean updateUser(User user) {
+		boolean flag=false;
+		
+		try {
+			
+			String query = "update user set tenthEdu=? , twelfthEdu=? , clgEdu=? , country=? , profession=? , about=? where email=?";
+			PreparedStatement p = con.prepareStatement(query);
+			p.setString(1, user.getTenthEdu());
+			p.setString(2, user.getTwelfthEdu());
+			p.setString(3, user.getClgEdu());
+			p.setString(4, user.getCountry());
+			p.setString(5, user.getProffession());
+			p.setString(6, user.getAbout());
+			p.setString(7, user.getEmail());
+			
+			p.executeUpdate();
+			
+			flag = true;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return flag;
+	}
+	
+	public boolean updateProfile(User user) {
+		boolean flag = false;
+		
+		try {
+			String query = "update user set profile=? where email=?";
+			PreparedStatement p = con.prepareStatement(query);
+			p.setString(1, user.getProfile());
+			p.setString(2, user.getEmail());
+			
+			p.executeUpdate();
+			
+			flag = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return flag;
+	}
 }

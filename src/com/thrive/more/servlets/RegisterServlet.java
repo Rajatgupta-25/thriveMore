@@ -34,12 +34,14 @@ public class RegisterServlet extends HttpServlet {
 			String gender = request.getParameter("gender");
 			String number = request.getParameter("number");
 			String profile;
-			int threvens = 0;
+			String threvens = "0";
 			if(password.equals(confirmPassword)) {
 				if(gender.equals("male")) {
 					profile = "profile.male.png";
-				}else {
+				}else if(gender.equals("female")) {
 					profile = "profile.female.png";
+				}else {
+					profile = "profile.trans.png";
 				}
 				
 				User user = new User(fname, lname, email, password, gender, profile, number, threvens);
